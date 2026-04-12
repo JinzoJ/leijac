@@ -1,0 +1,570 @@
+@charset "UTF-8";
+
+/* =============================================================
+   LEIJAC 株式会社 公式ホームページ
+   style.css
+   ============================================================= */
+
+BODY {
+  background-color: #04042a;
+  color: #ffffff;
+  font-family: "MS Gothic", "ＭＳ ゴシック", "Hiragino Kaku Gothic Pro",
+               "Yu Gothic", "Noto Sans JP", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+A         { color: #00ff00; text-decoration: underline; }
+A:visited { color: #00ff00; }
+A:hover   { color: #ffeb3b; }
+A:active  { color: #00cc00; }
+
+/* -----------------------------------------------------------
+   Page frame (fixed 960px, centered, table-based layout)
+   ----------------------------------------------------------- */
+.page-table {
+  width: 960px;
+  margin: 0 auto;
+  border-collapse: collapse;
+  background-color: #04042a;
+}
+
+TD.side {
+  width: 192px;
+  background-color: #04042a;
+  vertical-align: top;
+  position: relative;
+  border-right: 2px solid #14148c;
+}
+
+TD.side.right {
+  border-right: none;
+  border-left: 2px solid #14148c;
+}
+
+TD.center {
+  width: 576px;
+  background-color: #14148c;
+  vertical-align: top;
+  padding: 0;
+}
+
+/* -----------------------------------------------------------
+   Logo mark (appears in both side panels)
+   ----------------------------------------------------------- */
+.logo-mark {
+  padding: 18px 12px;
+  position: relative;
+  z-index: 10;
+}
+
+.logo-en {
+  font-family: "Arial Black", "Helvetica", sans-serif;
+  font-size: 30px;
+  font-weight: 900;
+  color: #ffffff;
+  letter-spacing: -2px;
+  line-height: 1;
+  text-shadow:
+    -1px -1px 0 #000000,
+     1px -1px 0 #000000,
+    -1px  1px 0 #000000,
+     1px  1px 0 #000000,
+     3px  3px 0 #d83838;
+}
+
+.logo-jp {
+  font-size: 11px;
+  color: #ffeb3b;
+  margin-top: 4px;
+  letter-spacing: 2px;
+}
+
+/* -----------------------------------------------------------
+   Decorative wireframe circles (staggered fade-in cascade)
+   ----------------------------------------------------------- */
+.circle {
+  position: absolute;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 50%;
+  opacity: 0;
+  animation-name: circleIn;
+  animation-duration: 0.6s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+}
+
+@keyframes circleIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* -----------------------------------------------------------
+   Title banner (subpage top header)
+   ----------------------------------------------------------- */
+.title-banner {
+  background-color: #04042a;
+  padding: 20px 32px 22px 32px;
+  border-bottom: 2px solid #14148c;
+  position: relative;
+}
+
+.page-title {
+  font-family: "MS Gothic", "ＭＳ ゴシック", "Hiragino Kaku Gothic Pro", sans-serif;
+  font-size: 34px;
+  font-weight: 700;
+  color: #ffeb3b;
+  letter-spacing: 6px;
+  line-height: 1.1;
+  text-shadow:
+    -1px -1px 0 #5a4a00,
+     1px -1px 0 #5a4a00,
+    -1px  1px 0 #5a4a00,
+     1px  1px 0 #5a4a00,
+     3px  3px 0 #000000;
+}
+
+.page-title-en {
+  font-family: "Arial Black", "Helvetica", sans-serif;
+  font-size: 38px;
+  font-weight: 900;
+  color: #ffeb3b;
+  letter-spacing: 4px;
+  line-height: 1.1;
+  text-shadow:
+    -1px -1px 0 #5a4a00,
+     1px -1px 0 #5a4a00,
+    -1px  1px 0 #5a4a00,
+     1px  1px 0 #5a4a00,
+     3px  3px 0 #000000;
+}
+
+.page-title-sub {
+  font-size: 12px;
+  color: #88c8ff;
+  margin-top: 2px;
+}
+
+.back-link {
+  position: absolute;
+  right: 28px;
+  top: 32px;
+  font-size: 12px;
+}
+
+/* -----------------------------------------------------------
+   Content area
+   ----------------------------------------------------------- */
+.content-area {
+  padding: 26px 34px;
+}
+
+.section-header {
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffeb3b;
+  margin: 0 0 12px 0;
+  padding-bottom: 4px;
+  border-bottom: 1px dotted #ffeb3b;
+}
+
+.blurb {
+  font-size: 13px;
+  color: #ffffff;
+  line-height: 1.9;
+  margin-bottom: 26px;
+  padding: 14px 16px;
+  background-color: #04042a;
+  border: 1px solid #3838a8;
+}
+
+.info-note {
+  font-size: 12px;
+  color: #88c8ff;
+  line-height: 1.8;
+  padding: 10px 14px;
+  background-color: #04042a;
+  border: 1px solid #3838a8;
+}
+
+/* -----------------------------------------------------------
+   Info tables (会社概要, 沿革, 募集要項, etc.)
+   ----------------------------------------------------------- */
+TABLE.info {
+  width: 100%;
+  font-size: 13px;
+  color: #ffffff;
+  border-collapse: collapse;
+  margin-bottom: 26px;
+}
+
+TABLE.info TD {
+  padding: 5px 0;
+  vertical-align: top;
+}
+
+TABLE.info TD.label {
+  color: #88c8ff;
+  padding-right: 14px;
+  width: 30%;
+}
+
+TABLE.info.bordered TD {
+  padding: 6px 0;
+  border-bottom: 1px dotted #3838a8;
+}
+
+TABLE.info.bordered TD.label {
+  padding: 6px 14px 6px 0;
+}
+
+TABLE.info.bordered TR:last-child TD {
+  border-bottom: none;
+}
+
+TABLE.chronicle {
+  width: 100%;
+  font-size: 13px;
+  color: #ffffff;
+  border-collapse: collapse;
+}
+
+TABLE.chronicle TD.year {
+  color: #88c8ff;
+  padding: 4px 14px 4px 0;
+  width: 22%;
+  vertical-align: top;
+  white-space: nowrap;
+}
+
+TABLE.chronicle TD.event {
+  padding: 4px 0;
+  vertical-align: top;
+}
+
+/* -----------------------------------------------------------
+   Copyright footer (appears on every page)
+   ----------------------------------------------------------- */
+.copyright {
+  margin-top: 22px;
+  padding-top: 12px;
+  border-top: 1px solid #3838a8;
+  font-size: 11px;
+  color: #ffeb3b;
+  text-align: center;
+}
+
+/* -----------------------------------------------------------
+   MENU PAGE specifics
+   ----------------------------------------------------------- */
+.menu-band {
+  background-color: #04042a;
+  height: 100px;
+  position: relative;
+  border-bottom: 2px solid #14148c;
+}
+
+.menu-body {
+  padding: 30px 42px;
+}
+
+.menu-list {
+  font-size: 26px;
+  font-weight: 700;
+  color: #ffeb3b;
+  line-height: 1.55;
+  text-shadow:
+    -1px -1px 0 #5a4a00,
+     1px -1px 0 #5a4a00,
+    -1px  1px 0 #5a4a00,
+     1px  1px 0 #5a4a00,
+     2px  2px 0 #000000;
+}
+
+.menu-list A {
+  color: #ffeb3b;
+  text-decoration: none;
+  display: block;
+  padding: 2px 0;
+}
+
+.menu-list A:hover {
+  color: #ffffff;
+}
+
+.menu-copyright {
+  margin-top: 26px;
+  font-size: 12px;
+  color: #ffeb3b;
+}
+
+/* Decorative wireframe rectangles in the menu top band */
+.deco-rect {
+  position: absolute;
+  border-width: 2px;
+  border-style: solid;
+}
+
+/* -----------------------------------------------------------
+   SPLASH PAGE specifics (index.html)
+   ----------------------------------------------------------- */
+BODY.splash {
+  background-color: #04042a;
+  overflow: hidden;
+}
+
+.splash-wrap {
+  width: 960px;
+  height: 600px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.splash-logo-en {
+  font-family: "Arial Black", "Helvetica", sans-serif;
+  font-size: 72px;
+  font-weight: 900;
+  color: #ffffff;
+  letter-spacing: -4px;
+  line-height: 1;
+  text-shadow:
+    -2px -2px 0 #000000,
+     2px -2px 0 #000000,
+    -2px  2px 0 #000000,
+     2px  2px 0 #000000,
+     5px  5px 0 #d83838;
+}
+
+.splash-logo-jp {
+  font-size: 20px;
+  color: #ffeb3b;
+  margin-top: 10px;
+  letter-spacing: 8px;
+}
+
+.enter-button {
+  display: inline-block;
+  padding: 10px 38px;
+  border: 2px solid #ffeb3b;
+  color: #ffeb3b;
+  font-size: 18px;
+  letter-spacing: 6px;
+  text-decoration: none;
+  background-color: #04042a;
+}
+
+.enter-button:hover {
+  background-color: #ffeb3b;
+  color: #04042a;
+}
+
+.splash-copyright {
+  font-size: 11px;
+  color: #9999cc;
+  letter-spacing: 2px;
+}
+
+/* -----------------------------------------------------------
+   PRODUCT CATALOG specifics (seihin-jouhou.html)
+   ----------------------------------------------------------- */
+.featured-card {
+  background-color: #04042a;
+  border: 2px solid #ffeb3b;
+  padding: 16px;
+  margin-bottom: 28px;
+  position: relative;
+}
+
+.featured-card .badge {
+  position: absolute;
+  top: -10px;
+  right: 12px;
+  background-color: #d83838;
+  color: #ffeb3b;
+  font-family: "Arial Black", sans-serif;
+  font-size: 11px;
+  padding: 2px 10px;
+  border: 1px solid #ffeb3b;
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+
+TABLE.featured-layout {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+TABLE.featured-layout TD.thumb {
+  width: 180px;
+  padding-right: 18px;
+  vertical-align: top;
+}
+
+TABLE.featured-layout TD.info {
+  vertical-align: top;
+}
+
+.thumb-box {
+  height: 110px;
+  position: relative;
+  display: table;
+  width: 100%;
+}
+
+.thumb-box .thumb-inner {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  font-family: "Arial Black", sans-serif;
+  font-weight: 900;
+  letter-spacing: -1px;
+  line-height: 1;
+}
+
+.thumb-box .thumb-dash {
+  position: absolute;
+  top: 8px; left: 8px; right: 8px; bottom: 8px;
+  border: 1px dashed currentColor;
+  pointer-events: none;
+}
+
+.featured-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #ffeb3b;
+  text-shadow:
+    -1px -1px 0 #5a4a00,
+     1px -1px 0 #5a4a00,
+    -1px  1px 0 #5a4a00,
+     1px  1px 0 #5a4a00,
+     2px  2px 0 #000000;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+
+.product-row {
+  padding: 12px 0;
+  border-bottom: 1px dotted #3838a8;
+}
+
+.product-row:last-child {
+  border-bottom: none;
+}
+
+TABLE.product-layout {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+TABLE.product-layout TD.thumb-cell {
+  width: 130px;
+  padding-right: 14px;
+  vertical-align: top;
+}
+
+TABLE.product-layout TD.info-cell {
+  vertical-align: top;
+}
+
+TABLE.product-layout .thumb-box {
+  height: 78px;
+}
+
+.product-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #ffeb3b;
+  margin-bottom: 3px;
+}
+
+.product-title .year {
+  color: #88c8ff;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.product-title .subtitle-jp {
+  color: #ffffff;
+  font-size: 13px;
+}
+
+.product-meta {
+  font-size: 11px;
+  color: #88c8ff;
+  margin-bottom: 5px;
+}
+
+.product-desc {
+  font-size: 12px;
+  color: #ffffff;
+  line-height: 1.6;
+}
+
+/* -----------------------------------------------------------
+   NEWS specifics (news.html)
+   ----------------------------------------------------------- */
+.news-entry {
+  padding: 14px 0;
+  border-bottom: 1px dotted #3838a8;
+}
+
+.news-entry:last-child {
+  border-bottom: none;
+}
+
+.news-head {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0;
+}
+
+.news-date {
+  font-size: 12px;
+  color: #88c8ff;
+  font-weight: 700;
+  white-space: nowrap;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.new-badge {
+  display: inline-block;
+  background-color: #d83838;
+  color: #ffeb3b;
+  font-family: "Arial Black", sans-serif;
+  font-size: 10px;
+  padding: 1px 6px;
+  border: 1px solid #ffeb3b;
+  font-weight: 900;
+  letter-spacing: 1px;
+  vertical-align: middle;
+  margin-left: 12px;
+  animation: newBlink 1.4s ease-in-out infinite;
+}
+
+@keyframes newBlink {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.35; }
+}
+
+.news-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #ffeb3b;
+  margin: 0 0 5px 0;
+}
+
+.news-body {
+  font-size: 12px;
+  color: #ffffff;
+  line-height: 1.8;
+}
+
+/* -----------------------------------------------------------
+   CONTACT specifics (otoiawase.html)
+   ----------------------------------------------------------- */
+.contact-email {
+  color: #00ff00;
+  text-decoration: underline;
+}

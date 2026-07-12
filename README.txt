@@ -39,20 +39,26 @@ for leijac.com is.
  What it looks like
 -------------------------------------------------------------------
 
-The site is styled as a 2001 Japanese corporate website built with
-IBM HomePage Builder. Everything is in Japanese. The layout is a
-fixed 960px three-panel frame with a LEIJAC logo mirrored on both
-side panels and a center content column in royal blue.
+The site is a 1:1 homage to the "How to Digital ART" DVD-ROM
+(Kadokawa, 2001, built with IBM HomePage Builder). Everything is
+in Japanese.
 
-Decorative wireframe circles cascade in on page load: right side
-top-to-bottom, then left side bottom-to-top. Each circle fades in
-over 0.6 seconds on a staggered delay. Circles stay on after the
-cascade completes.
+Splash and menu run on a fixed 800x600 stage that scales to fit
+the window (fullscreen-IE-in-2001 presentation). The splash logo
+pieces fly in from off-screen on choppy 50ms timers, then the
+page auto-advances to the menu after 30 seconds (or the beveled
+>>Skip>> button). The menu is the disc's layout: navy logo block,
+wireframe deco rectangles, RGB wireframe circles on a black left
+rail, flat #000090 panel, numbered yellow menu items that roll
+over to cyan.
 
-The news page has a blinking NEW badge on the two most recent
-entries (pulses via CSS opacity keyframes).
+Interior pages use the disc's section template: #00006f blue,
+yellow text, white links, red Return arrow top-right, thick white
+HR, content in alternating #0000cc / #0000a2 banded table rows.
 
-Links are green (#00ff00), matching the period convention.
+The logo is a PNG render (inf/leijac.png, from After Effects) —
+no typographic logo anywhere. The news page keeps its blinking
+NEW badge (CSS opacity keyframes).
 
 -------------------------------------------------------------------
  The fiction
@@ -60,8 +66,9 @@ Links are green (#00ff00), matching the period convention.
 
 This site is an in-fiction artifact. レイジャック株式会社 is
 depicted as a small Nagoya arcade game studio founded in 1989 by
-フランシスコ・アドリアン (代表取締役社長) and 伊藤雅史
-(取締役副社長). Their catalog contains six released arcade titles
+服部隆造 (Hattori Ryūzō, 代表取締役社長) and 伊藤雅史
+(取締役副社長). All names are fictional Japanese businessmen —
+nothing ties the fiction to any real person. Their catalog contains six released arcade titles
 from 1990 to 2000 plus one in-development title for 2001
 (ジェット・フェニックス). Address is a real Nagoya business
 district postal code (460-0008, 中区栄) but the building is
@@ -79,14 +86,15 @@ anything outside the in-fiction 2001 Japanese Leijac universe.
 
 All visual styling lives in style.css. Common edits:
 
-  - Blue shade         body background, #04042a
-  - Royal blue center  #14148c
-  - Yellow accents     #ffeb3b
-  - Link green         #00ff00
-  - Circle fade delay  search for "animation-delay" in HTML files
+  - Interior blue      BODY.interior, #00006f
+  - Band rows          .band-a #0000cc / .band-b #0000a2
+  - Menu panel blue    .menu-panel, #000090
+  - Yellow accents     #ffff00 (menu items, rules, © lines)
+  - Fly-in speed       FRAMES / tick values in index.html script
   - Splash redirect    change "30" in META Refresh on index.html
 
-The circle delays are inline in each page's HTML so you can tweak
-the cascade per page without touching the stylesheet.
+Splash layer start positions are the vfxSlide() calls in
+index.html; menu button coordinates are inline styles in
+menu.html (800x600 stage space, same as the disc).
 
 ===================================================================

@@ -76,9 +76,12 @@ fictional. Phone number prefix (052-264) is real Nagoya but the
 last four digits are fake. Dates for the Amusement Machine Show
 2001 in the news page reference real event dates.
 
-Nothing on this site references Horror Theater, Leijac Digital
-Entertainment LLC (the actual modern company), Marshall NC, or
-anything outside the in-fiction 2001 Japanese Leijac universe.
+The copyright line on every page reads "©Leijac Digital
+Entertainment 2001" in English — matching the disc convention
+(the source DVD-ROM's line was "©Kadokawashoten 2001", also in
+English). Beyond that trade name, nothing on this site references
+Horror Theater, Marshall NC, or anything outside the in-fiction
+2001 Japanese Leijac universe.
 
 -------------------------------------------------------------------
  Customization

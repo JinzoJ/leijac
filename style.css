@@ -39,9 +39,9 @@ BODY {
 
 .stage IMG { -webkit-user-drag: none; }
 
-/* the crust preservative: when the 800x600 stage scales up, baked
-   bitmap labels scale as fat pixels instead of getting smoothed */
-.stage IMG, .int-header IMG { image-rendering: pixelated; }
+/* the crust preservative — ONLY on the baked menu-index bitmaps:
+   they scale as fat pixels instead of getting smoothed */
+IMG.crust { image-rendering: pixelated; }
 
 /* -----------------------------------------------------------
    SPLASH — back.jpg quadrant background, rebuilt

@@ -2,569 +2,396 @@
 
 /* =============================================================
    LEIJAC 株式会社 公式ホームページ
-   style.css
+   style.css — DVD-ROM edition
+   (design source: How to Digital ART DVD-ROM, 2001,
+    IBM HomePage Builder — 800x600 fullscreen presentation)
    ============================================================= */
 
 BODY {
-  background-color: #04042a;
-  color: #ffffff;
-  font-family: "MS Gothic", "ＭＳ ゴシック", "Hiragino Kaku Gothic Pro",
-               "Yu Gothic", "Noto Sans JP", sans-serif;
+  background-color: #000000;
+  color: #ffff00;
+  font-family: "MS PGothic", "ＭＳ Ｐゴシック", "MS Gothic", "Hiragino Kaku Gothic Pro",
+               "Yu Gothic", "Noto Sans JP", Verdana, sans-serif;
   margin: 0;
   padding: 0;
 }
 
-A         { color: #00ff00; text-decoration: underline; }
-A:visited { color: #00ff00; }
-A:hover   { color: #ffeb3b; }
-A:active  { color: #00cc00; }
-
 /* -----------------------------------------------------------
-   Page frame (fixed 960px, centered, table-based layout)
+   800x600 STAGE (splash + menu run "fullscreen" like the disc)
    ----------------------------------------------------------- */
-.page-table {
-  width: 960px;
-  margin: 0 auto;
-  border-collapse: collapse;
-  background-color: #04042a;
+.viewport {
+  position: fixed;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  overflow: hidden;
+  background-color: #000000;
 }
 
-TD.side {
-  width: 192px;
-  background-color: #04042a;
-  vertical-align: top;
-  position: relative;
-  border-right: 2px solid #14148c;
-}
-
-TD.side.right {
-  border-right: none;
-  border-left: 2px solid #14148c;
-}
-
-TD.center {
-  width: 576px;
-  background-color: #14148c;
-  vertical-align: top;
-  padding: 0;
-}
-
-/* -----------------------------------------------------------
-   Logo mark (appears in both side panels)
-   ----------------------------------------------------------- */
-.logo-mark {
-  padding: 18px 12px;
-  position: relative;
-  z-index: 10;
-}
-
-.logo-en {
-  font-family: "Arial Black", "Helvetica", sans-serif;
-  font-size: 30px;
-  font-weight: 900;
-  color: #ffffff;
-  letter-spacing: -2px;
-  line-height: 1;
-  text-shadow:
-    -1px -1px 0 #000000,
-     1px -1px 0 #000000,
-    -1px  1px 0 #000000,
-     1px  1px 0 #000000,
-     3px  3px 0 #d83838;
-}
-
-.logo-jp {
-  font-size: 11px;
-  color: #ffeb3b;
-  margin-top: 4px;
-  letter-spacing: 2px;
-}
-
-/* -----------------------------------------------------------
-   Decorative wireframe circles (staggered fade-in cascade)
-   ----------------------------------------------------------- */
-.circle {
+.stage {
   position: absolute;
-  border-width: 2px;
-  border-style: solid;
-  border-radius: 50%;
-  opacity: 0;
-  animation-name: circleIn;
-  animation-duration: 0.6s;
-  animation-timing-function: ease-out;
-  animation-fill-mode: forwards;
+  left: 50%; top: 50%;
+  width: 800px; height: 600px;
+  margin-left: -400px; margin-top: -300px;
+  overflow: hidden;
+  /* JS sets transform: scale() to fit the window */
+  transform-origin: 50% 50%;
 }
 
-@keyframes circleIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+.stage IMG { -webkit-user-drag: none; }
+
+/* -----------------------------------------------------------
+   SPLASH — back.jpg quadrant background, rebuilt
+   ----------------------------------------------------------- */
+.bg-quad { position: absolute; }
+.bg-tl { left: 0;     top: 0;     width: 304px; height: 178px; background-color: #050526; }
+.bg-tr { left: 304px; top: 0;     width: 496px; height: 178px; background-color: #00004d; }
+.bg-bl { left: 0;     top: 178px; width: 304px; height: 422px; background-color: #000080; }
+.bg-br { left: 304px; top: 178px; width: 496px; height: 422px; background-color: #000000; }
+.bg-vline { position: absolute; left: 304px; top: 0; width: 1px; height: 600px; background-color: #ffff00; }
+.bg-hline { position: absolute; left: 0; top: 178px; width: 800px; height: 1px; background-color: #ffff00; }
+
+/* chrome italic word — the disc's "Digital" */
+.chrome-word {
+  font-family: Verdana, "Arial", sans-serif;
+  font-style: italic;
+  font-weight: bold;
+  color: #c8c8e8;
+  letter-spacing: 1px;
+  text-shadow:
+    -1px -1px 0 #30306a,
+     1px -1px 0 #30306a,
+    -1px  1px 0 #30306a,
+     1px  1px 0 #30306a,
+     2px  2px 0 #000000;
+}
+
+.jp-word {
+  font-family: "MS PGothic", "ＭＳ Ｐゴシック", sans-serif;
+  font-weight: bold;
+  color: #ffff00;
+  text-shadow:
+    -1px -1px 0 #6a5a00,
+     1px -1px 0 #6a5a00,
+    -1px  1px 0 #6a5a00,
+     1px  1px 0 #6a5a00,
+     2px  2px 0 #000000;
+}
+
+/* the >>Skip>> button — btn_up.gif / btn_down.gif */
+.btn-skip {
+  display: inline-block;
+  width: 100px; height: 25px;
+  line-height: 21px;
+  box-sizing: border-box;
+  background-color: #c0c0c0;
+  border: 2px outset #ffffff;
+  color: #000000;
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 13px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+.btn-skip:active {
+  border-style: inset;
+  background-color: #b0b0b0;
+}
+
+.splash-copy {
+  font-family: Verdana, "MS PGothic", sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  color: #ffff00;
+  white-space: nowrap;
 }
 
 /* -----------------------------------------------------------
-   Title banner (subpage top header)
+   MENU — menu_bk.jpg layout, rebuilt
    ----------------------------------------------------------- */
-.title-banner {
-  background-color: #04042a;
-  padding: 20px 32px 22px 32px;
-  border-bottom: 2px solid #14148c;
-  position: relative;
+.menu-logo-block {
+  position: absolute; left: 0; top: 0;
+  width: 192px; height: 74px;
+  background-color: #000050;
+}
+.menu-topstrip {
+  position: absolute; left: 192px; top: 0;
+  width: 608px; height: 74px;
+  background-color: #000000;
+}
+.menu-yellowline {
+  position: absolute; left: 0; top: 74px;
+  width: 800px; height: 2px;
+  background-color: #ffff00;
+}
+.menu-leftrail {
+  position: absolute; left: 0; top: 76px;
+  width: 192px; height: 524px;
+  background-color: #000000;
+}
+.menu-panel {
+  position: absolute; left: 192px; top: 76px;
+  width: 608px; height: 524px;
+  background-color: #000090;
 }
 
-.page-title {
-  font-family: "MS Gothic", "ＭＳ ゴシック", "Hiragino Kaku Gothic Pro", sans-serif;
-  font-size: 34px;
-  font-weight: 700;
-  color: #ffeb3b;
-  letter-spacing: 6px;
-  line-height: 1.1;
+/* wireframe decorations */
+.wire-rect { position: absolute; border-width: 1px; border-style: solid; }
+.wire-circle { position: absolute; border-width: 1px; border-style: solid; border-radius: 50%; }
+
+/* menu buttons — menu1.gif (yellow) / menu1b.gif (cyan) */
+.menu-item {
+  position: absolute;
+  font-family: Verdana, "MS PGothic", "ＭＳ Ｐゴシック", sans-serif;
+  font-size: 22px;
+  font-weight: bold;
+  color: #ffff00;
+  text-decoration: none;
+  white-space: nowrap;
   text-shadow:
-    -1px -1px 0 #5a4a00,
-     1px -1px 0 #5a4a00,
-    -1px  1px 0 #5a4a00,
-     1px  1px 0 #5a4a00,
-     3px  3px 0 #000000;
+    -1px -1px 0 #7a7ab8,
+     1px -1px 0 #7a7ab8,
+    -1px  1px 0 #7a7ab8,
+     1px  1px 0 #7a7ab8;
+}
+.menu-item:hover  { color: #00ffff; }
+.menu-item:active { color: #ffffff; }
+
+/* ©line — kadokawa.gif style */
+.menu-copy {
+  position: absolute;
+  font-family: Verdana, "MS PGothic", sans-serif;
+  font-size: 15px;
+  font-weight: bold;
+  color: #ffff00;
+  white-space: nowrap;
 }
 
-.page-title-en {
-  font-family: "Arial Black", "Helvetica", sans-serif;
-  font-size: 38px;
-  font-weight: 900;
-  color: #ffeb3b;
-  letter-spacing: 4px;
-  line-height: 1.1;
+/* -----------------------------------------------------------
+   INTERIOR PAGES — making/index.html template
+   bg #00006f, yellow text, white links, banded tables
+   ----------------------------------------------------------- */
+BODY.interior {
+  background-color: #00006f;
+  color: #ffff00;
+  font-size: 14px;
+}
+
+BODY.interior A         { color: #ffffff; }
+BODY.interior A:visited { color: #cccccc; }
+BODY.interior A:hover   { color: #00ffff; }
+BODY.interior A:active  { color: #00ffff; }
+
+.int-header {
+  width: 100%;
+  border-collapse: collapse;
+}
+.int-header TD { vertical-align: bottom; padding: 6px 10px; }
+
+.int-title {
+  font-family: Verdana, "MS PGothic", "ＭＳ Ｐゴシック", sans-serif;
+  font-size: 24px;
+  font-weight: bold;
+  color: #ffff00;
+  white-space: nowrap;
   text-shadow:
-    -1px -1px 0 #5a4a00,
-     1px -1px 0 #5a4a00,
-    -1px  1px 0 #5a4a00,
-     1px  1px 0 #5a4a00,
-     3px  3px 0 #000000;
+    -1px -1px 0 #7a7ab8,
+     1px -1px 0 #7a7ab8,
+    -1px  1px 0 #7a7ab8,
+     1px  1px 0 #7a7ab8;
 }
 
-.page-title-sub {
-  font-size: 12px;
-  color: #88c8ff;
+.int-digital {
+  font-family: Verdana, Arial, sans-serif;
+  font-style: italic;
+  font-weight: bold;
+  font-size: 13px;
+  color: #c8c8e8;
+  letter-spacing: 3px;
   margin-top: 2px;
 }
 
-.back-link {
-  position: absolute;
-  right: 28px;
-  top: 32px;
-  font-size: 12px;
+/* the red Return arrow — return.gif */
+.btn-return {
+  display: inline-block;
+  background-color: #e00000;
+  color: #000000;
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: none;
+  padding: 3px 16px 3px 24px;
+  -webkit-clip-path: polygon(0 50%, 14px 0, 100% 0, 100% 100%, 14px 100%);
+  clip-path: polygon(0 50%, 14px 0, 100% 0, 100% 100%, 14px 100%);
+}
+.btn-return:hover, .btn-return:visited, .btn-return:active { color: #000000; }
+.btn-return:hover { background-color: #ff2020; }
+
+BODY.interior HR {
+  height: 4px;
+  border: 0;
+  background-color: #ffffff;
+  margin: 4px 0 14px 0;
 }
 
-/* -----------------------------------------------------------
-   Content area
-   ----------------------------------------------------------- */
-.content-area {
-  padding: 26px 34px;
+.int-body { padding: 0 18px 20px 18px; }
+
+/* banded content rows — TR bgcolor #0000cc / #0000a2 */
+TABLE.band {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 8px;
+  font-size: 13px;
+  color: #ffff00;
 }
+TABLE.band TD {
+  padding: 10px 14px;
+  vertical-align: top;
+}
+TR.band-a TD { background-color: #0000cc; }
+TR.band-b TD { background-color: #0000a2; }
 
 .section-header {
-  font-size: 16px;
-  font-weight: 700;
-  color: #ffeb3b;
-  margin: 0 0 12px 0;
-  padding-bottom: 4px;
-  border-bottom: 1px dotted #ffeb3b;
-}
-
-.blurb {
-  font-size: 13px;
+  font-size: 17px;
+  font-weight: bold;
   color: #ffffff;
-  line-height: 1.9;
-  margin-bottom: 26px;
-  padding: 14px 16px;
-  background-color: #04042a;
-  border: 1px solid #3838a8;
+  margin: 20px 0 10px 0;
 }
 
-.info-note {
-  font-size: 12px;
-  color: #88c8ff;
-  line-height: 1.8;
-  padding: 10px 14px;
-  background-color: #04042a;
-  border: 1px solid #3838a8;
-}
-
-/* -----------------------------------------------------------
-   Info tables (会社概要, 沿革, 募集要項, etc.)
-   ----------------------------------------------------------- */
+/* info tables (会社概要, 募集要項, 連絡先...) */
 TABLE.info {
   width: 100%;
   font-size: 13px;
-  color: #ffffff;
+  color: #ffff00;
   border-collapse: collapse;
-  margin-bottom: 26px;
+  margin-bottom: 22px;
 }
-
 TABLE.info TD {
-  padding: 5px 0;
+  padding: 6px 0;
   vertical-align: top;
+  border-bottom: 1px dotted #4d4dbf;
 }
-
 TABLE.info TD.label {
-  color: #88c8ff;
+  color: #ffffff;
   padding-right: 14px;
   width: 30%;
 }
-
-TABLE.info.bordered TD {
-  padding: 6px 0;
-  border-bottom: 1px dotted #3838a8;
-}
-
-TABLE.info.bordered TD.label {
-  padding: 6px 14px 6px 0;
-}
-
-TABLE.info.bordered TR:last-child TD {
-  border-bottom: none;
-}
+TABLE.info TR:last-child TD { border-bottom: none; }
 
 TABLE.chronicle {
   width: 100%;
   font-size: 13px;
-  color: #ffffff;
+  color: #ffff00;
   border-collapse: collapse;
 }
-
 TABLE.chronicle TD.year {
-  color: #88c8ff;
+  color: #ffffff;
   padding: 4px 14px 4px 0;
   width: 22%;
   vertical-align: top;
   white-space: nowrap;
 }
+TABLE.chronicle TD.event { padding: 4px 0; vertical-align: top; }
 
-TABLE.chronicle TD.event {
-  padding: 4px 0;
-  vertical-align: top;
-}
-
-/* -----------------------------------------------------------
-   Copyright footer (appears on every page)
-   ----------------------------------------------------------- */
-.copyright {
-  margin-top: 22px;
-  padding-top: 12px;
-  border-top: 1px solid #3838a8;
-  font-size: 11px;
-  color: #ffeb3b;
-  text-align: center;
-}
-
-/* -----------------------------------------------------------
-   MENU PAGE specifics
-   ----------------------------------------------------------- */
-.menu-band {
-  background-color: #04042a;
-  height: 100px;
-  position: relative;
-  border-bottom: 2px solid #14148c;
-}
-
-.menu-body {
-  padding: 30px 42px;
-}
-
-.menu-list {
-  font-size: 26px;
-  font-weight: 700;
-  color: #ffeb3b;
-  line-height: 1.55;
-  text-shadow:
-    -1px -1px 0 #5a4a00,
-     1px -1px 0 #5a4a00,
-    -1px  1px 0 #5a4a00,
-     1px  1px 0 #5a4a00,
-     2px  2px 0 #000000;
-}
-
-.menu-list A {
-  color: #ffeb3b;
-  text-decoration: none;
-  display: block;
-  padding: 2px 0;
-}
-
-.menu-list A:hover {
-  color: #ffffff;
-}
-
-.menu-copyright {
-  margin-top: 26px;
-  font-size: 12px;
-  color: #ffeb3b;
-}
-
-/* Decorative wireframe rectangles in the menu top band */
-.deco-rect {
-  position: absolute;
-  border-width: 2px;
-  border-style: solid;
-}
-
-/* -----------------------------------------------------------
-   SPLASH PAGE specifics (index.html)
-   ----------------------------------------------------------- */
-BODY.splash {
-  background-color: #04042a;
-  overflow: hidden;
-}
-
-.splash-wrap {
-  width: 960px;
-  height: 600px;
-  margin: 0 auto;
-  position: relative;
-}
-
-.splash-logo-en {
-  font-family: "Arial Black", "Helvetica", sans-serif;
-  font-size: 72px;
-  font-weight: 900;
-  color: #ffffff;
-  letter-spacing: -4px;
-  line-height: 1;
-  text-shadow:
-    -2px -2px 0 #000000,
-     2px -2px 0 #000000,
-    -2px  2px 0 #000000,
-     2px  2px 0 #000000,
-     5px  5px 0 #d83838;
-}
-
-.splash-logo-jp {
-  font-size: 20px;
-  color: #ffeb3b;
-  margin-top: 10px;
-  letter-spacing: 8px;
-}
-
-.enter-button {
-  display: inline-block;
-  padding: 10px 38px;
-  border: 2px solid #ffeb3b;
-  color: #ffeb3b;
-  font-size: 18px;
-  letter-spacing: 6px;
-  text-decoration: none;
-  background-color: #04042a;
-}
-
-.enter-button:hover {
-  background-color: #ffeb3b;
-  color: #04042a;
-}
-
-.splash-copyright {
-  font-size: 11px;
-  color: #9999cc;
-  letter-spacing: 2px;
-}
-
-/* -----------------------------------------------------------
-   PRODUCT CATALOG specifics (seihin-jouhou.html)
-   ----------------------------------------------------------- */
-.featured-card {
-  background-color: #04042a;
-  border: 2px solid #ffeb3b;
-  padding: 16px;
-  margin-bottom: 28px;
-  position: relative;
-}
-
-.featured-card .badge {
-  position: absolute;
-  top: -10px;
-  right: 12px;
-  background-color: #d83838;
-  color: #ffeb3b;
-  font-family: "Arial Black", sans-serif;
-  font-size: 11px;
-  padding: 2px 10px;
-  border: 1px solid #ffeb3b;
-  font-weight: 900;
-  letter-spacing: 2px;
-}
-
-TABLE.featured-layout {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-TABLE.featured-layout TD.thumb {
-  width: 180px;
-  padding-right: 18px;
-  vertical-align: top;
-}
-
-TABLE.featured-layout TD.info {
-  vertical-align: top;
-}
-
-.thumb-box {
-  height: 110px;
-  position: relative;
-  display: table;
-  width: 100%;
-}
-
-.thumb-box .thumb-inner {
-  display: table-cell;
-  vertical-align: middle;
-  text-align: center;
-  font-family: "Arial Black", sans-serif;
-  font-weight: 900;
-  letter-spacing: -1px;
-  line-height: 1;
-}
-
-.thumb-box .thumb-dash {
-  position: absolute;
-  top: 8px; left: 8px; right: 8px; bottom: 8px;
-  border: 1px dashed currentColor;
-  pointer-events: none;
-}
-
-.featured-title {
-  font-size: 22px;
-  font-weight: 700;
-  color: #ffeb3b;
-  text-shadow:
-    -1px -1px 0 #5a4a00,
-     1px -1px 0 #5a4a00,
-    -1px  1px 0 #5a4a00,
-     1px  1px 0 #5a4a00,
-     2px  2px 0 #000000;
-  letter-spacing: 2px;
-  margin-bottom: 8px;
-}
-
-.product-row {
-  padding: 12px 0;
-  border-bottom: 1px dotted #3838a8;
-}
-
-.product-row:last-child {
-  border-bottom: none;
-}
-
-TABLE.product-layout {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-TABLE.product-layout TD.thumb-cell {
-  width: 130px;
-  padding-right: 14px;
-  vertical-align: top;
-}
-
-TABLE.product-layout TD.info-cell {
-  vertical-align: top;
-}
-
-TABLE.product-layout .thumb-box {
-  height: 78px;
-}
-
-.product-title {
-  font-size: 15px;
-  font-weight: 700;
-  color: #ffeb3b;
-  margin-bottom: 3px;
-}
-
-.product-title .year {
-  color: #88c8ff;
-  font-size: 12px;
-  font-weight: 400;
-}
-
-.product-title .subtitle-jp {
-  color: #ffffff;
+.blurb {
   font-size: 13px;
+  line-height: 1.9;
+  margin-bottom: 22px;
+  padding: 12px 16px;
+  background-color: #0000a2;
 }
 
-.product-meta {
-  font-size: 11px;
-  color: #88c8ff;
-  margin-bottom: 5px;
-}
-
-.product-desc {
+.info-note {
   font-size: 12px;
-  color: #ffffff;
-  line-height: 1.6;
+  line-height: 1.8;
+  padding: 10px 14px;
+  background-color: #0000a2;
 }
 
-/* -----------------------------------------------------------
-   NEWS specifics (news.html)
-   ----------------------------------------------------------- */
-.news-entry {
-  padding: 14px 0;
-  border-bottom: 1px dotted #3838a8;
-}
+/* news entries — banded like the disc's section lists */
+.news-entry { padding: 12px 14px; margin-bottom: 8px; }
+.news-entry.band-a { background-color: #0000cc; }
+.news-entry.band-b { background-color: #0000a2; }
 
-.news-entry:last-child {
-  border-bottom: none;
-}
-
-.news-head {
-  display: block;
-  margin-bottom: 6px;
-  font-size: 0;
-}
-
-.news-date {
-  font-size: 12px;
-  color: #88c8ff;
-  font-weight: 700;
-  white-space: nowrap;
-  display: inline-block;
-  vertical-align: middle;
-}
+.news-date { font-size: 12px; color: #ffffff; font-weight: bold; }
 
 .new-badge {
   display: inline-block;
-  background-color: #d83838;
-  color: #ffeb3b;
-  font-family: "Arial Black", sans-serif;
+  background-color: #e00000;
+  color: #ffff00;
+  font-family: Verdana, Arial, sans-serif;
   font-size: 10px;
   padding: 1px 6px;
-  border: 1px solid #ffeb3b;
-  font-weight: 900;
+  font-weight: bold;
   letter-spacing: 1px;
   vertical-align: middle;
-  margin-left: 12px;
+  margin-left: 10px;
   animation: newBlink 1.4s ease-in-out infinite;
 }
-
 @keyframes newBlink {
   0%, 100% { opacity: 1; }
   50%      { opacity: 0.35; }
 }
 
-.news-title {
-  font-size: 14px;
-  font-weight: 700;
-  color: #ffeb3b;
-  margin: 0 0 5px 0;
+.news-title { font-size: 14px; font-weight: bold; margin: 5px 0; }
+.news-body  { font-size: 12px; line-height: 1.8; }
+
+/* products */
+.featured-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #ffff00;
+  margin-bottom: 8px;
+  text-shadow:
+    -1px -1px 0 #7a7ab8,
+     1px -1px 0 #7a7ab8,
+    -1px  1px 0 #7a7ab8,
+     1px  1px 0 #7a7ab8;
+}
+.badge {
+  display: inline-block;
+  background-color: #e00000;
+  color: #ffff00;
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 11px;
+  padding: 2px 10px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  margin-bottom: 6px;
 }
 
-.news-body {
+TD.thumb-cell { width: 130px; padding-right: 6px; }
+.thumb-box {
+  height: 78px;
+  position: relative;
+  display: table;
+  width: 100%;
+}
+.thumb-box .thumb-inner {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  font-family: Verdana, Arial, sans-serif;
+  font-weight: bold;
+  letter-spacing: -1px;
+  line-height: 1.1;
+}
+.thumb-box.tall { height: 110px; }
+
+.product-title { font-size: 15px; font-weight: bold; margin-bottom: 3px; }
+.product-title .year { color: #ffffff; font-size: 12px; font-weight: normal; }
+.product-title .subtitle-jp { color: #ffffff; font-size: 13px; }
+.product-meta { font-size: 11px; color: #ffffff; margin-bottom: 5px; }
+.product-desc { font-size: 12px; line-height: 1.6; }
+
+TABLE.plain { width: 100%; border-collapse: collapse; }
+TABLE.plain TD { vertical-align: top; }
+
+/* footer */
+.copyright {
+  margin-top: 24px;
   font-size: 12px;
-  color: #ffffff;
-  line-height: 1.8;
-}
-
-/* -----------------------------------------------------------
-   CONTACT specifics (otoiawase.html)
-   ----------------------------------------------------------- */
-.contact-email {
-  color: #00ff00;
-  text-decoration: underline;
+  font-weight: bold;
+  color: #ffff00;
+  text-align: center;
 }

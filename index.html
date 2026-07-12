@@ -8,32 +8,90 @@
 <META NAME="keywords" CONTENT="レイジャック,LEIJAC,ゲーム,業務用,アーケード,名古屋">
 <TITLE>レイジャック株式会社</TITLE>
 <LINK REL="stylesheet" TYPE="text/css" HREF="style.css">
+<LINK REL="icon" HREF="inf/leijac_s.png">
+<SCRIPT language="JavaScript">
+<!--
+//
+// HpbVfx — layer fly-in, DVD-ROM style.
+// Constant-step slides on a 50ms timer, clip-wipe on a 100ms timer,
+// all layers released together after a 1000ms first delay.
+//
+var FRAMES = 40;
+
+function vfxSlide(id, fromX, fromY, tick) {
+  var el = document.getElementById(id);
+  var endX = el.offsetLeft, endY = el.offsetTop;
+  var stepX = (endX - fromX) / FRAMES, stepY = (endY - fromY) / FRAMES;
+  if (stepX > 0 && stepX < 1) stepX = 1;  if (stepX < 0 && stepX > -1) stepX = -1;
+  if (stepY > 0 && stepY < 1) stepY = 1;  if (stepY < 0 && stepY > -1) stepY = -1;
+  var x = fromX, y = fromY;
+  el.style.left = Math.round(x) + "px";
+  el.style.top  = Math.round(y) + "px";
+  el.style.visibility = "visible";
+  function step() {
+    x += stepX;  y += stepY;
+    var doneX = (stepX === 0) || (stepX > 0 && x >= endX) || (stepX < 0 && x <= endX);
+    var doneY = (stepY === 0) || (stepY > 0 && y >= endY) || (stepY < 0 && y <= endY);
+    if (doneX) x = endX;
+    if (doneY) y = endY;
+    el.style.left = Math.round(x) + "px";
+    el.style.top  = Math.round(y) + "px";
+    if (!(doneX && doneY)) setTimeout(step, tick);
+  }
+  setTimeout(step, tick);
+}
+
+function vfxWipe(id, tick) {
+  var el = document.getElementById(id);
+  var w = el.offsetWidth, c = 0;
+  el.style.clipPath = "inset(0 " + w + "px 0 0)";
+  el.style.visibility = "visible";
+  function step() {
+    c += 4;
+    if (c >= w) { el.style.clipPath = "inset(0 0 0 0)"; return; }
+    el.style.clipPath = "inset(0 " + (w - c) + "px 0 0)";
+    setTimeout(step, tick);
+  }
+  setTimeout(step, tick);
+}
+
+function HpbVfxinit() {
+  setTimeout(function () {
+    vfxSlide("Layer1", -420,  130, 50);   /* A130: in from the left  */
+    vfxSlide("Layer2", -160,  600, 50);   /* A830: in from bottom-left */
+    vfxSlide("Layer3",   68, -60,  50);   /* A330: in from the top   */
+    vfxSlide("Layer4", -320, -60,  50);   /* A530: in from top-left  */
+    vfxWipe ("Layer5", 100);              /* D120: wipe reveal       */
+  }, 1000);
+}
+
+function fitStage() {
+  var s = Math.min(window.innerWidth / 800, window.innerHeight / 600);
+  document.getElementById("stage").style.transform = "scale(" + s + ")";
+}
+//-->
+</SCRIPT>
 </HEAD>
-<BODY CLASS="splash" BGCOLOR="#04042a" TEXT="#ffffff" LINK="#00ff00" VLINK="#00ff00" ALINK="#00cc00">
+<BODY CLASS="splash" BGCOLOR="#000000" TEXT="#ffffff" LINK="#00ff00" VLINK="#00ff00" ALINK="#00cc00" onload="fitStage();HpbVfxinit();" onresize="fitStage();">
 
-<DIV class="splash-wrap">
+<DIV class="viewport">
+<DIV class="stage" id="stage">
 
-  <DIV class="circle" style="left: 60px; top: 80px; width: 70px; height: 70px; border-color: #d83838; animation-delay: 0s;"></DIV>
-  <DIV class="circle" style="left: 110px; top: 150px; width: 120px; height: 120px; border-color: #3878d8; animation-delay: 0.25s;"></DIV>
-  <DIV class="circle" style="left: 40px; top: 410px; width: 90px; height: 90px; border-color: #38d8d8; animation-delay: 0.5s;"></DIV>
+  <DIV class="bg-quad bg-tl"></DIV>
+  <DIV class="bg-quad bg-tr"></DIV>
+  <DIV class="bg-quad bg-bl"></DIV>
+  <DIV class="bg-quad bg-br"></DIV>
+  <DIV class="bg-hline"></DIV>
+  <DIV class="bg-vline"></DIV>
 
-  <DIV class="deco-rect" style="left: 740px; top: 108px; width: 100px; height: 64px; border-color: #38d838; opacity: 0; animation: circleIn 0.6s ease-out 0.75s forwards;"></DIV>
-  <DIV class="deco-rect" style="left: 800px; top: 360px; width: 60px; height: 90px; border-color: #d8d838; opacity: 0; animation: circleIn 0.6s ease-out 1.0s forwards;"></DIV>
-  <DIV class="circle" style="left: 820px; top: 200px; width: 80px; height: 80px; border-color: #d83878; animation-delay: 1.25s;"></DIV>
+  <DIV id="Layer1" style="position: absolute; left: 66px; top: 130px; z-index: 1; visibility: hidden;"><IMG src="inf/leijac.png" alt="LEIJAC" width="400" height="73" border="0"></DIV>
+  <DIV id="Layer2" class="chrome-word" style="position: absolute; left: 490px; top: 150px; font-size: 16px; z-index: 2; visibility: hidden;">SINCE 1989</DIV>
+  <DIV id="Layer3" class="chrome-word" style="position: absolute; left: 68px; top: 238px; font-size: 30px; z-index: 3; visibility: hidden;">digital</DIV>
+  <DIV id="Layer4" class="jp-word" style="position: absolute; left: 250px; top: 242px; font-size: 26px; z-index: 4; visibility: hidden;">レイジャック株式会社</DIV>
+  <DIV id="Layer5" class="splash-copy" style="position: absolute; left: 301px; top: 450px; z-index: 5; visibility: hidden;">©レイジャック株式会社　2001</DIV>
+  <DIV id="Layer6" style="position: absolute; left: 334px; top: 371px; z-index: 6;"><A href="menu.html" class="btn-skip">&gt;&gt;Skip&gt;&gt;</A></DIV>
 
-  <DIV style="position: absolute; left: 0; top: 165px; width: 100%; text-align: center; opacity: 0; animation: circleIn 0.8s ease-out 1.6s forwards;">
-    <DIV class="splash-logo-en">LEIJAC</DIV>
-    <DIV class="splash-logo-jp">レイジャック株式会社</DIV>
-  </DIV>
-
-  <DIV style="position: absolute; left: 0; top: 400px; width: 100%; text-align: center; opacity: 0; animation: circleIn 0.8s ease-out 2.3s forwards;">
-    <A HREF="menu.html" class="enter-button">入　る</A>
-  </DIV>
-
-  <DIV style="position: absolute; left: 0; bottom: 30px; width: 100%; text-align: center; opacity: 0; animation: circleIn 0.8s ease-out 2.8s forwards;">
-    <SPAN class="splash-copyright">©レイジャック株式会社　2001</SPAN>
-  </DIV>
-
+</DIV>
 </DIV>
 
 </BODY>

@@ -55,6 +55,30 @@ function vfxWipe(id, tick) {
   setTimeout(step, tick);
 }
 
+function vfxSpiral(id, radius, revs, tick) {
+  /* HpbVfx0301 pattern "I": orbit the resting position on a shrinking
+     radius until it locks — the disc's own spiral-in, choppy steps and all */
+  var el = document.getElementById(id);
+  var endX = el.offsetLeft, endY = el.offsetTop;
+  var r = radius, a = -Math.PI / 2;
+  var stepA = (Math.PI * 2 * revs) / 40;
+  function step() {
+    r *= 0.9;  a += stepA;
+    if (r < 2) {
+      el.style.left = endX + "px";
+      el.style.top  = endY + "px";
+      return;
+    }
+    el.style.left = Math.round(endX + Math.cos(a) * r) + "px";
+    el.style.top  = Math.round(endY + Math.sin(a) * r) + "px";
+    setTimeout(step, tick);
+  }
+  el.style.left = Math.round(endX + Math.cos(a) * r) + "px";
+  el.style.top  = Math.round(endY + Math.sin(a) * r) + "px";
+  el.style.visibility = "visible";
+  setTimeout(step, tick);
+}
+
 function HpbVfxinit() {
   setTimeout(function () {
     vfxSlide("Layer1", -420,  130, 50);   /* A130: in from the left  */
@@ -63,6 +87,9 @@ function HpbVfxinit() {
     vfxSlide("Layer4", -320, -60,  50);   /* A530: in from top-left  */
     vfxWipe ("Layer5", 100);              /* D120: wipe reveal       */
   }, 1000);
+  setTimeout(function () {
+    vfxSpiral("Layer7", 170, 2.5, 50);    /* I-pattern: tagline spiral-in */
+  }, 1900);
 }
 
 function fitStage() {
@@ -90,6 +117,7 @@ function fitStage() {
   <DIV id="Layer4" class="jp-word" style="position: absolute; left: 250px; top: 242px; font-size: 26px; z-index: 4; visibility: hidden;">レイジャック株式会社</DIV>
   <DIV id="Layer5" class="splash-copy" style="position: absolute; left: 240px; top: 450px; z-index: 5; visibility: hidden;">©Leijac Digital Entertainment 2001</DIV>
   <DIV id="Layer6" style="position: absolute; left: 334px; top: 371px; z-index: 6;"><A href="menu.html" class="btn-skip">&gt;&gt;Skip&gt;&gt;</A></DIV>
+  <DIV id="Layer7" class="chrome-word" style="position: absolute; left: 322px; top: 306px; font-size: 22px; z-index: 7; visibility: hidden;">“Have a Heart”</DIV>
 
 </DIV>
 </DIV>
